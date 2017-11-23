@@ -19,17 +19,4 @@ Once you have these, simply pass these values along with your username/password 
 credentials constructor, which you will then use to initialize an instance of the FortniteAPI class,
 which you can then grab stats with.
 
-    <dependencies>
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.8.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.http-client</groupId>
-            <artifactId>google-http-client</artifactId>
-            <version>1.23.0</version>
-        </dependency>
-    </dependencies>
-
 # // TODO: token refreshing
