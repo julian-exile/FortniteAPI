@@ -12,15 +12,19 @@ import com.xilixir.fortniteapi.OAuth.RequestType;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class FortniteAPI {
+    private ScheduledExecutorService scheduler;
     private Gson gson;
     private OAuthData authData;
     private Credentials credentials;
-    private OAuthExchange exchange;
 
     public FortniteAPI(Credentials credentials) throws Exception {
         this.credentials = credentials;
+        this.scheduler = Executors.newScheduledThreadPool(1);
         gson = new Gson();
         if (credentials.getEmail().equals("login")
                 || credentials.getPassword().equals("email")
@@ -46,17 +50,19 @@ public class FortniteAPI {
                 new OAuthRequest(RequestType.GET, Endpoint.OAUTH_EXCHANGE)
                         .build();
         exchange.getHeaders().setAuthorization("bearer " + this.authData.getAccess_token());
-        this.exchange = gson.fromJson(exchange.execute(), OAuthExchange.class);
+        OAuthExchange exchange1 = gson.fromJson(exchange.execute(), OAuthExchange.class);
 
         OAuthRequest exchangeToken =
                 new OAuthRequest(RequestType.POST, Endpoint.OAUTH_TOKEN)
                         .addField("grant_type", "exchange_code")
-                        .addField("exchange_code", this.exchange.getCode())
+                        .addField("exchange_code", exchange1.getCode())
                         .addField("includePerms", "true")
                         .addField("token_type", "eg1")
                         .build();
         exchangeToken.getHeaders().setAuthorization("basic " + credentials.getBase64hashPairClient());
         this.authData = gson.fromJson(exchangeToken.execute(), OAuthData.class);
+        this.authData.setExpires_in(this.authData.getExpires_in() - 5);
+        this.scheduleTokenRefresh();
         return this.authData;
     }
 
@@ -80,15 +86,23 @@ public class FortniteAPI {
         return new AlltimeStats(st);
     }
 
-//    public OAuthData refreshToken() throws IOException {
-//        HttpRequestFactory factory = new NetHttpTransport().createRequestFactory();
-//        String content = "grant_type=refresh_token&refresh_token=" + this.authData.getRefresh_token() + "&includePerms=true";
-//        HttpRequest request = factory.buildPostRequest(new GenericUrl(Endpoint.OAUTH_TOKEN.toString()), new ByteArrayContent("application/x-www-form-urlencoded", content.getBytes()));
-//        setHeaders(request, false, false, content);
-//        String response = request.execute().parseAsString();
-//        this.authData = gson.fromJson(response, OAuthData.class);
-//        return this.authData;
-//    }
+    private void scheduleTokenRefresh(){
+        scheduler.schedule(this::refreshToken, this.authData.getExpires_in(), TimeUnit.SECONDS);
+    }
+
+    private OAuthData refreshToken(){
+        OAuthRequest initialLogin =
+                new OAuthRequest(RequestType.POST, Endpoint.OAUTH_TOKEN)
+                        .addField("grant_type", "refresh_token")
+                        .addField("refresh_token", this.authData.getRefresh_token())
+                        .addField("includePerms", "true")
+                        .build();
+        initialLogin.getHeaders().setAuthorization("basic " + credentials.getBase64hashPair());
+        this.authData = gson.fromJson(initialLogin.execute(), OAuthData.class);
+        this.authData.setExpires_in(this.authData.getExpires_in() - 5);
+        this.scheduleTokenRefresh();
+        return this.authData;
+    }
 
     private String encode(String s) {
         try {

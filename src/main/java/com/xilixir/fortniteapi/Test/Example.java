@@ -1,5 +1,6 @@
 package com.xilixir.fortniteapi.Test;
 
+import com.google.gson.GsonBuilder;
 import com.xilixir.fortniteapi.Credentials;
 import com.xilixir.fortniteapi.FortniteAPI;
 import com.xilixir.fortniteapi.Frame.AlltimeStats;
@@ -16,8 +17,8 @@ public class Example {
             Configuration login = new Configuration("login", Credentials.class).withDefault(credentials);
             credentials = login.read();
             FortniteAPI api = new FortniteAPI(credentials);
-
             AlltimeStats stats = api.getAllTimeStats("me2thanks");
+            System.out.println(new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create().toJson(stats));
         } catch (Exception e) {
             e.printStackTrace();
         }

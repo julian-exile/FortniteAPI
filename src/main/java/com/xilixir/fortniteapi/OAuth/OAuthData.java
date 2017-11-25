@@ -31,6 +31,10 @@ public class OAuthData {
         this.perms = perms;
     }
 
+    public void setExpires_in(long expires_in) {
+        this.expires_in = expires_in;
+    }
+
     public String getRefresh_token() {
         return refresh_token;
     }
