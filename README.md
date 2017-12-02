@@ -1,4 +1,4 @@
-# FortniteAPI
+# Fortnite API
 unofficial fortnite api for stats
 hey dudes, nobody has done this yet, so I did it.
 
