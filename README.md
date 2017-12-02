@@ -17,3 +17,7 @@ I used fiddler 4 to monitor the http requests and grab the info.
 Once you have these, simply pass these values along with your username/password as arguments in the
 credentials constructor, which you will then use to initialize an instance of the FortniteAPI class,
 which you can then grab stats with.
+
+Thanks for reading and checking this out!
+You can donate to me directly here!
+http://paypal.me/xilixir
