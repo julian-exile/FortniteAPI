@@ -19,5 +19,7 @@ credentials constructor, which you will then use to initialize an instance of th
 which you can then grab stats with.
 
 Thanks for reading and checking this out!
+
 You can donate to me directly here!
+
 http://paypal.me/xilixir
