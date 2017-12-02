@@ -3,6 +3,7 @@ package com.xilixir.fortniteapi;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xilixir.fortniteapi.Frame.AlltimeStats;
+import com.xilixir.fortniteapi.Frame.Credentials;
 import com.xilixir.fortniteapi.Frame.LookupResult;
 import com.xilixir.fortniteapi.OAuth.OAuthExchange;
 import com.xilixir.fortniteapi.OAuth.OAuthData;
@@ -97,7 +98,7 @@ public class FortniteAPI {
                         .addField("refresh_token", this.authData.getRefresh_token())
                         .addField("includePerms", "true")
                         .build();
-        initialLogin.getHeaders().setAuthorization("basic " + credentials.getBase64hashPair());
+        initialLogin.getHeaders().setAuthorization("basic " + this.credentials.getBase64hashPairClient());
         this.authData = gson.fromJson(initialLogin.execute(), OAuthData.class);
         this.authData.setExpires_in(this.authData.getExpires_in() - 5);
         this.scheduleTokenRefresh();

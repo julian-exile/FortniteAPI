@@ -37,6 +37,15 @@ public class AlltimeStats {
     private double soloKillsPerMatch;
     private double duoKillsPerMatch;
     private double squadKillsPerMatch;
+    private double totalMatchesPlayed;
+    private double totalLastModified;
+    private double totalWins;
+    private double totalMinutesPlayed;
+    private double totalKills;
+    private double totalKillDeathRatio;
+    private double totalWinRatio;
+    private double totalKillsPerMinute;
+    private double totalKillsPerMatch;
 
     public AlltimeStats(Stat[] stats){
         Map<String, Stat> mappedByName = new HashMap<>();
@@ -70,22 +79,81 @@ public class AlltimeStats {
         this.duoTop5 = (int) getValue(mappedByName, "br_placetop5_pc_m0_p10");
         this.soloTop25 = (int) getValue(mappedByName, "br_placetop25_pc_m0_p2");
         this.soloTop10 = (int) getValue(mappedByName, "br_placetop10_pc_m0_p2");
+        this.calculateStuff();
+    }
 
+    private void calculateStuff(){
+        // kills/death
         this.soloKillDeathRatio = this.soloKills/((this.soloMatchesPlayed - this.soloWins) > 0 ? (this.soloMatchesPlayed - this.soloWins) : 1);
         this.duoKillDeathRatio = this.duoKills/((this.duoMatchesPlayed - this.duoWins) > 0 ? (this.duoMatchesPlayed - this.duoWins) : 1);
         this.squadKillDeathRatio = this.squadKills/((this.squadMatchesPlayed - this.squadWins) > 0 ? (this.squadMatchesPlayed - this.squadWins) : 1);
 
+        // winrate
         this.soloWinRatio = (this.soloWins/(this.soloMatchesPlayed > 0 ? this.soloMatchesPlayed : 1)) * 100;
         this.duoWinRatio = (this.duoWins/(this.duoMatchesPlayed > 0 ? this.duoMatchesPlayed : 1)) * 100;
         this.squadWinRatio = (this.squadWins/(this.squadMatchesPlayed > 0 ? this.squadMatchesPlayed : 1)) * 100;
 
+        // kills/minute
         this.soloKillsPerMinute = this.soloKills/(this.soloMinutesPlayed > 0 ? this.soloMinutesPlayed : 1);
         this.duoKillsPerMinute = this.duoKills/(this.duoMinutesPlayed > 0 ? this.duoMinutesPlayed : 1);
         this.squadKillsPerMinute = this.squadKills/(this.squadMinutesPlayed > 0 ? this.squadMinutesPlayed : 1);
 
+        // kills/match
         this.soloKillsPerMatch = this.soloKills/(this.soloMatchesPlayed > 0 ? this.soloMatchesPlayed : 1);
         this.duoKillsPerMatch = this.duoKills/(this.duoMatchesPlayed > 0 ? this.duoMatchesPlayed : 1);
         this.squadKillsPerMatch = this.squadKills/(this.squadMatchesPlayed> 0 ? this.squadMatchesPlayed: 1);
+
+        // total
+        this.totalMatchesPlayed = this.soloMatchesPlayed + this.duoMatchesPlayed + this.squadMatchesPlayed;
+        this.totalLastModified = this.soloLastModified;
+        if (this.totalLastModified < this.duoLastModified){
+            this.totalLastModified = this.duoLastModified;
+        } else if (this.totalLastModified < this.squadLastModified){
+            this.totalLastModified = this.squadLastModified;
+        }
+        this.totalWins = this.soloWins + this.duoWins + this.squadWins;
+        this.totalMinutesPlayed = this.soloMinutesPlayed + this.duoMinutesPlayed + this.squadMinutesPlayed;
+        this.totalKills = this.soloKills + this.duoKills + this.squadKills;
+        this.totalKillDeathRatio = this.totalKills/((this.totalMatchesPlayed - this.totalWins) > 0 ? (this.totalMatchesPlayed - this.totalWins) : 1);
+        this.totalWinRatio = (this.totalWins/(this.totalMatchesPlayed > 0 ? this.totalMatchesPlayed : 1)) * 100;
+        this.totalKillsPerMinute = this.totalKills/(this.totalMinutesPlayed > 0 ? this.totalMinutesPlayed : 1);
+        this.totalKillsPerMatch = this.totalKillsPerMinute/(this.totalMatchesPlayed > 0 ? this.totalMatchesPlayed : 1);
+    }
+
+    public double getTotalMatchesPlayed() {
+        return totalMatchesPlayed;
+    }
+
+    public double getTotalLastModified() {
+        return totalLastModified;
+    }
+
+    public double getTotalWins() {
+        return totalWins;
+    }
+
+    public double getTotalMinutesPlayed() {
+        return totalMinutesPlayed;
+    }
+
+    public double getTotalKills() {
+        return totalKills;
+    }
+
+    public double getTotalKillDeathRatio() {
+        return totalKillDeathRatio;
+    }
+
+    public double getTotalWinRatio() {
+        return totalWinRatio;
+    }
+
+    public double getTotalKillsPerMinute() {
+        return totalKillsPerMinute;
+    }
+
+    public double getTotalKillsPerMatch() {
+        return totalKillsPerMatch;
     }
 
     public double getSoloMatchesPlayed() {

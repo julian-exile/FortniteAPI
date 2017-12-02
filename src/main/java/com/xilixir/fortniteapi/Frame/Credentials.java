@@ -1,4 +1,4 @@
-package com.xilixir.fortniteapi;
+package com.xilixir.fortniteapi.Frame;
 
 public class Credentials {
     private String email;

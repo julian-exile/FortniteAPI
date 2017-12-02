@@ -1,7 +1,7 @@
 package com.xilixir.fortniteapi.Test;
 
 import com.google.gson.GsonBuilder;
-import com.xilixir.fortniteapi.Credentials;
+import com.xilixir.fortniteapi.Frame.Credentials;
 import com.xilixir.fortniteapi.FortniteAPI;
 import com.xilixir.fortniteapi.Frame.AlltimeStats;
 
