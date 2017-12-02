@@ -18,6 +18,8 @@ Once you have these, simply pass these values along with your username/password 
 credentials constructor, which you will then use to initialize an instance of the FortniteAPI class,
 which you can then grab stats with.
 
+---
+
 Thanks for reading and checking this out!
 
 You can donate to me directly here!
