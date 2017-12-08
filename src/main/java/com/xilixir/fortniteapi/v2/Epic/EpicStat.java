@@ -1,12 +1,12 @@
-package com.xilixir.fortniteapi.Frame;
+package com.xilixir.fortniteapi.v2.Epic;
 
-public class Stat {
+public class EpicStat {
     private String name;
     private long value;
     private String window;
     private int ownerType;
 
-    public Stat(String name, long value, String window, int ownerType) {
+    public EpicStat(String name, long value, String window, int ownerType) {
         this.name = name;
         this.value = value;
         this.window = window;

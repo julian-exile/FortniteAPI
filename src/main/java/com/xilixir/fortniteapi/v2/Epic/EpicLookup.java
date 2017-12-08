@@ -1,10 +1,10 @@
-package com.xilixir.fortniteapi.Frame;
+package com.xilixir.fortniteapi.v2.Epic;
 
-public class LookupResult {
+public class EpicLookup {
     private String id;
     private String displayName;
 
-    public LookupResult(String id, String displayName) {
+    public EpicLookup(String id, String displayName) {
         this.id = id;
         this.displayName = displayName;
     }

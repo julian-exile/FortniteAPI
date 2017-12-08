@@ -1,10 +1,10 @@
-package com.xilixir.fortniteapi.Frame;
+package com.xilixir.fortniteapi.v2.Epic;
 
-public class Permission {
+public class EpicPermission {
     private String resource;
     private int action;
 
-    public Permission(String resource, int action) {
+    public EpicPermission(String resource, int action) {
         this.resource = resource;
         this.action = action;
     }

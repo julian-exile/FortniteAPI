@@ -1,4 +1,4 @@
-package com.xilixir.fortniteapi.Test;
+package com.xilixir.fortniteapi.v2;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

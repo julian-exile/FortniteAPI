@@ -1,14 +1,12 @@
-package com.xilixir.fortniteapi.OAuth;
+package com.xilixir.fortniteapi.v2.Epic;
 
-public class OAuthExchange {
+public class EpicAuthorizationExchange {
     private long expiresInSeconds;
     private String code;
     private String creatingClientId;
 
-    public OAuthExchange(long expiresInSeconds, String code, String creatingClientId) {
-        this.expiresInSeconds = expiresInSeconds;
-        this.code = code;
-        this.creatingClientId = creatingClientId;
+    public EpicAuthorizationExchange() {
+        //
     }
 
     public long getExpiresInSeconds() {
