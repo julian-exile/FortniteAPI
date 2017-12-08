@@ -1,4 +1,4 @@
-# FortniteAPI
+# Fortnite API
 unofficial fortnite api for stats
 hey dudes, nobody has done this yet, so I did it.
 
@@ -18,4 +18,10 @@ Once you have these, simply pass these values along with your username/password 
 credentials constructor, which you will then use to initialize an instance of the FortniteAPI class,
 which you can then grab stats with.
 
-# // TODO: token refreshing
+---
+
+Thanks for reading and checking this out!
+
+You can donate to me directly here!
+
+http://paypal.me/xilixir
