@@ -50,6 +50,62 @@ public class Stats {
     private double totalKillsPerMinute;
     private double totalKillsPerMatch;
 
+    public Stats(double br_score_pc_m0_p2, double br_score_pc_m0_p10, double br_score_pc_m0_p9, double br_matchesplayed_pc_m0_p2, double br_matchesplayed_pc_m0_p10, double br_matchesplayed_pc_m0_p9, long br_lastmodified_pc_m0_p2, long br_lastmodified_pc_m0_p10, long br_lastmodified_pc_m0_p9, double br_placetop1_pc_m0_p2, double br_placetop1_pc_m0_p10, double br_placetop1_pc_m0_p9, double br_minutesplayed_pc_m0_p2, double br_minutesplayed_pc_m0_p10, double br_minutesplayed_pc_m0_p9, double br_kills_pc_m0_p2, double br_kills_pc_m0_p10, double br_kills_pc_m0_p9, double br_placetop3_pc_m0_p9, double br_placetop6_pc_m0_p9, double br_placetop12_pc_m0_p10, double br_placetop5_pc_m0_p10, double br_placetop25_pc_m0_p2, double br_placetop10_pc_m0_p2) {
+        this.br_score_pc_m0_p2 = br_score_pc_m0_p2;
+        this.br_score_pc_m0_p10 = br_score_pc_m0_p10;
+        this.br_score_pc_m0_p9 = br_score_pc_m0_p9;
+        this.br_matchesplayed_pc_m0_p2 = br_matchesplayed_pc_m0_p2;
+        this.br_matchesplayed_pc_m0_p10 = br_matchesplayed_pc_m0_p10;
+        this.br_matchesplayed_pc_m0_p9 = br_matchesplayed_pc_m0_p9;
+        this.br_lastmodified_pc_m0_p2 = br_lastmodified_pc_m0_p2;
+        this.br_lastmodified_pc_m0_p10 = br_lastmodified_pc_m0_p10;
+        this.br_lastmodified_pc_m0_p9 = br_lastmodified_pc_m0_p9;
+        this.br_placetop1_pc_m0_p2 = br_placetop1_pc_m0_p2;
+        this.br_placetop1_pc_m0_p10 = br_placetop1_pc_m0_p10;
+        this.br_placetop1_pc_m0_p9 = br_placetop1_pc_m0_p9;
+        this.br_minutesplayed_pc_m0_p2 = br_minutesplayed_pc_m0_p2;
+        this.br_minutesplayed_pc_m0_p10 = br_minutesplayed_pc_m0_p10;
+        this.br_minutesplayed_pc_m0_p9 = br_minutesplayed_pc_m0_p9;
+        this.br_kills_pc_m0_p2 = br_kills_pc_m0_p2;
+        this.br_kills_pc_m0_p10 = br_kills_pc_m0_p10;
+        this.br_kills_pc_m0_p9 = br_kills_pc_m0_p9;
+        this.br_placetop3_pc_m0_p9 = br_placetop3_pc_m0_p9;
+        this.br_placetop6_pc_m0_p9 = br_placetop6_pc_m0_p9;
+        this.br_placetop12_pc_m0_p10 = br_placetop12_pc_m0_p10;
+        this.br_placetop5_pc_m0_p10 = br_placetop5_pc_m0_p10;
+        this.br_placetop25_pc_m0_p2 = br_placetop25_pc_m0_p2;
+        this.br_placetop10_pc_m0_p2 = br_placetop10_pc_m0_p2;
+    }
+
+    public static Stats subtract(Stats stored, Stats fresh){
+        return new Stats(
+                fresh.getBr_score_pc_m0_p2() - stored.getBr_score_pc_m0_p2(),
+                fresh.getBr_score_pc_m0_p10() - stored.getBr_score_pc_m0_p10(),
+                fresh.getBr_score_pc_m0_p9() - stored.getBr_score_pc_m0_p9(),
+                fresh.getBr_matchesplayed_pc_m0_p2() - stored.getBr_matchesplayed_pc_m0_p2(),
+                fresh.getBr_matchesplayed_pc_m0_p10() - stored.getBr_matchesplayed_pc_m0_p10(),
+                fresh.getBr_matchesplayed_pc_m0_p9() - stored.getBr_matchesplayed_pc_m0_p9(),
+                fresh.getBr_lastmodified_pc_m0_p2() - stored.getBr_lastmodified_pc_m0_p2(),
+                fresh.getBr_lastmodified_pc_m0_p10() - stored.getBr_lastmodified_pc_m0_p10(),
+                fresh.getBr_lastmodified_pc_m0_p9() - stored.getBr_lastmodified_pc_m0_p9(),
+                fresh.getBr_placetop1_pc_m0_p2() - stored.getBr_placetop1_pc_m0_p2(),
+                fresh.getBr_placetop1_pc_m0_p10() - stored.getBr_placetop1_pc_m0_p10(),
+                fresh.getBr_placetop1_pc_m0_p9() - stored.getBr_placetop1_pc_m0_p9(),
+                fresh.getBr_minutesplayed_pc_m0_p2() - stored.getBr_minutesplayed_pc_m0_p2(),
+                fresh.getBr_minutesplayed_pc_m0_p10() - stored.getBr_minutesplayed_pc_m0_p10(),
+                fresh.getBr_minutesplayed_pc_m0_p9() - stored.getBr_minutesplayed_pc_m0_p9(),
+                fresh.getBr_kills_pc_m0_p2() - stored.getBr_kills_pc_m0_p2(),
+                fresh.getBr_kills_pc_m0_p10() - stored.getBr_kills_pc_m0_p10(),
+                fresh.getBr_kills_pc_m0_p9() - stored.getBr_kills_pc_m0_p9(),
+                fresh.getBr_placetop3_pc_m0_p9() - stored.getBr_placetop3_pc_m0_p9(),
+                fresh.getBr_placetop6_pc_m0_p9() - stored.getBr_placetop6_pc_m0_p9(),
+                fresh.getBr_placetop12_pc_m0_p10() - stored.getBr_placetop12_pc_m0_p10(),
+                fresh.getBr_placetop5_pc_m0_p10() - stored.getBr_placetop5_pc_m0_p10(),
+                fresh.getBr_placetop25_pc_m0_p2() - stored.getBr_placetop25_pc_m0_p2(),
+                fresh.getBr_placetop10_pc_m0_p2() - stored.getBr_placetop10_pc_m0_p2()
+        );
+    }
+
     public void calculate(){
         // kills/death
         this.soloKillDeathRatio = this.getSoloKills()/((this.getSoloMatchesPlayed() - this.getSoloWins()) > 0 ? (this.getSoloMatchesPlayed() - this.getSoloWins()) : 1);
@@ -86,6 +142,102 @@ public class Stats {
         this.totalWinRatio = (this.totalWins/(this.totalMatchesPlayed > 0 ? this.totalMatchesPlayed : 1)) * 100;
         this.totalKillsPerMinute = this.totalKills/(this.totalMinutesPlayed > 0 ? this.totalMinutesPlayed : 1);
         this.totalKillsPerMatch = this.totalKills/(this.totalMatchesPlayed > 0 ? this.totalMatchesPlayed : 1);
+    }
+
+    public double getBr_score_pc_m0_p2() {
+        return br_score_pc_m0_p2;
+    }
+
+    public double getBr_score_pc_m0_p10() {
+        return br_score_pc_m0_p10;
+    }
+
+    public double getBr_score_pc_m0_p9() {
+        return br_score_pc_m0_p9;
+    }
+
+    public double getBr_matchesplayed_pc_m0_p2() {
+        return br_matchesplayed_pc_m0_p2;
+    }
+
+    public double getBr_matchesplayed_pc_m0_p10() {
+        return br_matchesplayed_pc_m0_p10;
+    }
+
+    public double getBr_matchesplayed_pc_m0_p9() {
+        return br_matchesplayed_pc_m0_p9;
+    }
+
+    public long getBr_lastmodified_pc_m0_p2() {
+        return br_lastmodified_pc_m0_p2;
+    }
+
+    public long getBr_lastmodified_pc_m0_p10() {
+        return br_lastmodified_pc_m0_p10;
+    }
+
+    public long getBr_lastmodified_pc_m0_p9() {
+        return br_lastmodified_pc_m0_p9;
+    }
+
+    public double getBr_placetop1_pc_m0_p2() {
+        return br_placetop1_pc_m0_p2;
+    }
+
+    public double getBr_placetop1_pc_m0_p10() {
+        return br_placetop1_pc_m0_p10;
+    }
+
+    public double getBr_placetop1_pc_m0_p9() {
+        return br_placetop1_pc_m0_p9;
+    }
+
+    public double getBr_minutesplayed_pc_m0_p2() {
+        return br_minutesplayed_pc_m0_p2;
+    }
+
+    public double getBr_minutesplayed_pc_m0_p10() {
+        return br_minutesplayed_pc_m0_p10;
+    }
+
+    public double getBr_minutesplayed_pc_m0_p9() {
+        return br_minutesplayed_pc_m0_p9;
+    }
+
+    public double getBr_kills_pc_m0_p2() {
+        return br_kills_pc_m0_p2;
+    }
+
+    public double getBr_kills_pc_m0_p10() {
+        return br_kills_pc_m0_p10;
+    }
+
+    public double getBr_kills_pc_m0_p9() {
+        return br_kills_pc_m0_p9;
+    }
+
+    public double getBr_placetop3_pc_m0_p9() {
+        return br_placetop3_pc_m0_p9;
+    }
+
+    public double getBr_placetop6_pc_m0_p9() {
+        return br_placetop6_pc_m0_p9;
+    }
+
+    public double getBr_placetop12_pc_m0_p10() {
+        return br_placetop12_pc_m0_p10;
+    }
+
+    public double getBr_placetop5_pc_m0_p10() {
+        return br_placetop5_pc_m0_p10;
+    }
+
+    public double getBr_placetop25_pc_m0_p2() {
+        return br_placetop25_pc_m0_p2;
+    }
+
+    public double getBr_placetop10_pc_m0_p2() {
+        return br_placetop10_pc_m0_p2;
     }
 
     public double getSoloKillDeathRatio() {
