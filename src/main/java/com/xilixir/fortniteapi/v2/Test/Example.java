@@ -1,11 +1,13 @@
 package com.xilixir.fortniteapi.v2.Test;
 
+import com.google.gson.Gson;
 import com.xilixir.fortniteapi.v2.Configuration;
 import com.xilixir.fortniteapi.v2.Credentials;
 import com.xilixir.fortniteapi.v2.Epic.EpicLookup;
-import com.xilixir.fortniteapi.v2.Epic.Store.BRStore;
+import com.xilixir.fortniteapi.v2.Epic.Friends.Direction;
+import com.xilixir.fortniteapi.v2.Epic.Friends.Friend;
+import com.xilixir.fortniteapi.v2.Epic.Friends.Status;
 import com.xilixir.fortniteapi.v2.FortniteAPI;
-import com.xilixir.fortniteapi.v2.Stats;
 
 import java.io.IOException;
 
@@ -20,9 +22,15 @@ public class Example {
             e.printStackTrace();
         }
         try {
-            Stats stats = api.getStats("name");
-            BRStore storeInfo = api.getBRStoreItems();
-            EpicLookup lookup = api.getUserInfo("name");
+            EpicLookup lookup = api.getUserInfo("bad.player");
+            Friend[] friends = api.getFriendListData(lookup.getId());
+            for (Friend friend : friends){
+                if (friend.getStatus() == Status.PENDING && friend.getDirection() == Direction.INBOUND) {
+                    System.out.println("attempting to delete friend: " + new Gson().toJson(friend));
+                    api.deleteFriendRequest(lookup.getId(), friend.getAccountId());
+                }
+            }
+            System.out.println(new Gson().toJson(friends));
         } catch (IOException e) {
             e.printStackTrace();
         }

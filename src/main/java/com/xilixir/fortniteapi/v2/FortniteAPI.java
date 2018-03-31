@@ -11,6 +11,7 @@ import com.xilixir.fortniteapi.v2.Epic.EpicAuthorization;
 import com.xilixir.fortniteapi.v2.Epic.EpicAuthorizationExchange;
 import com.xilixir.fortniteapi.v2.Epic.EpicLookup;
 import com.xilixir.fortniteapi.v2.Epic.EpicStat;
+import com.xilixir.fortniteapi.v2.Epic.Friends.Friend;
 import com.xilixir.fortniteapi.v2.Epic.Store.BRStore;
 import com.xilixir.fortniteapi.v2.Epic.Store.Catalog;
 import com.xilixir.fortniteapi.v2.Epic.Store.Storefront;
@@ -26,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 public class FortniteAPI {
     private HttpRequestFactory factory;
     private ScheduledExecutorService scheduler;
-    private EpicAuthorization auth;
+    public EpicAuthorization auth;
     private Credentials credentials;
 
     private static String authTokenEndpoint = "https://account-public-service-prod03.ol.epicgames.com/account/api/oauth/token";
@@ -123,6 +124,31 @@ public class FortniteAPI {
         stats.calculate();
         log("Got stats for id '" + userId + "'");
         return stats;
+    }
+
+   public Friend[] getFriendListData(String userId) throws IOException {
+        // request
+        GenericUrl url = new GenericUrl("https://friends-public-service-prod06.ol.epicgames.com/friends/api/public/friends/" + userId + "?includePending=true");
+        HttpRequest request = factory.buildGetRequest(url);
+
+        // headers
+        request.getHeaders().setAuthorization("bearer " + this.auth.getAccessToken());
+
+        String json = request.execute().parseAsString();
+        Friend[] friends = new Gson().fromJson(json, new TypeToken<Friend[]>(){}.getType());
+        log("Retrieved friend info");
+        return friends;
+    }
+
+    public void deleteFriendRequest(String userId, String userToDelete) throws IOException {
+        // request
+        GenericUrl url = new GenericUrl("https://friends-public-service-prod06.ol.epicgames.com/friends/api/public/friends/" + userId + "/" + userToDelete);
+        HttpRequest request = factory.buildDeleteRequest(url);
+
+        // headers
+        request.getHeaders().setAuthorization("bearer " + this.auth.getAccessToken());
+        request.execute();
+        log("Deleted friend " + userToDelete + " from " + userId);
     }
 
     public Catalog getAllStoreItems() throws IOException {
@@ -232,5 +258,9 @@ public class FortniteAPI {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public EpicAuthorization getAuth() {
+        return auth;
     }
 }
